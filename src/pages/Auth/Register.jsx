@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Register() {
     return (
-        <div className='container'>
+        <div className='container mt-5 py-5'>
             <div className="row">
                 <div className="col-lg-9 col-12 mx-auto">
         <form>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Header() {
     
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@ export default function Header() {
                     </ul>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <Link to="/cart"> <i class="bi bi-cart fs-4 fw-bolder me-4"></i></Link>
-                   
+                        <div >
                         <button className="btn btn-primary text-white me-md-2" type="button">
                         <Link to="login" className='link-light link-underline-opacity-0'>Login</Link>
                             
@@ -36,6 +36,7 @@ export default function Header() {
                         <button className="btn btn-primary" type="button">
                         <Link to="register" className='link-light link-underline-opacity-0'>Register</Link>
                         </button>
+                        </div>
                     </div>
                 </div>
             </div>
