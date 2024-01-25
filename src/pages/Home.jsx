@@ -18,7 +18,7 @@ const navigate = useNavigate();
       async function getData(){
         let response=await fetch('https://dummyjson.com/products');
         let data=await response.json();
-        console.log(data.products)
+        // console.log(data.products)
         setitems(data.products.slice(0,4));
       //   setimage(items[0].images[0])
       //   console.log(items[0].images[0])

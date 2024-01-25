@@ -19,12 +19,12 @@ import Cart from "./user/Cart";
 
 let router=createBrowserRouter(createRoutesFromElements(
 
-          <Route path="/"  element={<Layout />}>
+          <Route path="/" loader={getItem}  element={<Layout />}>
             <Route index loader={api} element={<Home />} />
             <Route path="*" element={<Error />}  />
             <Route path="gallery" loader={api} element={<Gallery />} />
 
-            <Route path="gallery/:id" element={<Itemdetails />} loader={api}>
+            <Route path="gallery/:id" element={<Itemdetails  />} loader={api}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="price" element={<Price />} />

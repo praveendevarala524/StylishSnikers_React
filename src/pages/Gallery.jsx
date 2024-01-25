@@ -3,7 +3,7 @@ import { Link, useLoaderData, useNavigate, useSearchParams } from 'react-router-
 
 export default function Gallery() {
   let data=useLoaderData();
-  console.table(data)
+  // console.table(data)
   let [param,setparam] = useSearchParams()
   const [items, setitems] = useState(data);
   let [mainData,setMainData]=useState(data);
@@ -22,7 +22,7 @@ export default function Gallery() {
     setitems(mainData.filter(item=>item.category===value))
 
     // let items=param?items.filter(x=>x.category===param.id) : items;
-    console.log(items)
+    // console.log(items)
   }
   else{
     setparam({});
@@ -33,7 +33,8 @@ export default function Gallery() {
   }
  
   return (
-    <div className="row">
+    <div className="container py-5 mt-5">
+      <div className="row">
       <div className="col-3">
         <ul className="list-group">
           <li className="list-group-item">
@@ -71,6 +72,7 @@ export default function Gallery() {
           })}
         </div>
       </div>
+    </div>
     </div>
   )
 }

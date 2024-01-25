@@ -11,10 +11,12 @@ export function getItem(){
         let items=JSON.parse(localStorage.getItem("arrayinLocalStorage"));
         return items;
 }
-export function isLoggedIn(){
-
-
-     let isLoggedIn=localStorage.getItem("isLoggedin", JSON.stringify(isLoggedIn));
-     return isLoggedIn;
-
+// export function isLoggedIn(){
+//      let isLoggedIn=localStorage.getItem("isLoggedin", JSON.stringify(isLoggedIn));
+//      return isLoggedIn;
+// }
+export function isLoggedIn() {
+    let isLoggedInValue = localStorage.getItem("isLoggedin");
+    return JSON.parse(isLoggedInValue);
+    console.log(JSON.parse(isLoggedInValue))
 }

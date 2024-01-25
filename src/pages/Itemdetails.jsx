@@ -2,56 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { useParams ,Outlet, useNavigate, NavLink, useLocation, useMatch, useLoaderData } from 'react-router-dom'
 export default function Itemdetails() {
     let data=useLoaderData();
+    // console.log(data);
     let param = useParams();
-    let ob = data.find((x) =>
-
-    x.id === Number(param.id)
-)
+    let ob = data.find((x) =>  x.id === Number(param.id) )
+    // console.log(ob)
     let [item, setitem] = useState(ob);
     let [mainImage,setMainImage] = useState(ob.images[0]);
-    let location = useLocation();
-    const isDashboardActive = useMatch('dashboard');
     const navigate =useNavigate();
-    
+  
+    useEffect(() => { }, [])
    
-    // useEffect(() => {
-    //     async function getData() {
-    //         let response = await fetch('https://dummyjson.com/products');
-    //         let data = await response.json();
-    //         // console.log(data)
-    //         console.log(data.products);
-    //         let arr = data.products;
-    //         console.log(arr);
-    //         console.log(param.id);
-    //         let ob = arr.find((x) =>
-
-    //             x.id === Number(param.id)
-    //         )
-    //         console.log(ob);
-    //         setitem(ob);
-    //         setMainImage(ob.images[1])
-    //         //   setimage(items[0].images[0])
-    //         //   console.log(items[0].images[0])
-    //     }
-    //     getData();
-
-
-    // }, [])
     const handlesubmit =() =>{
-          let arrayinLocalStorage=JSON.parse(localStorage.getItem("arrayinLocalStorage"));
-         
-          arrayinLocalStorage.push(item);
-          localStorage.setItem("arrayinLocalStorage",JSON.stringify(arrayinLocalStorage));
-          console.log(localStorage.getItem("arrayinLocalStorage"));
+            let arrayinLocalStorage=JSON.parse(localStorage.getItem("arrayinLocalStorage"));
+            if(arrayinLocalStorage.some(x=>x.id===item.id)){
+            item.noOfUnits++;
+            }
+            else{
+            item.noOfUnits=1;
+            arrayinLocalStorage.push(item);
+            }
+            localStorage.setItem("arrayinLocalStorage",JSON.stringify(arrayinLocalStorage));
+            console.table(JSON.parse(localStorage.getItem("arrayinLocalStorage")));
+      }
 
+    const changeImage =(n) => {
+        setMainImage(n)
     }
-//   function changeImage(n){
-//   setMainImage(n)
-//   }
-
-const changeImage =(n) => {
-    setMainImage(n)
-}
+       
     return (
         <div className='container py-5 mt-5'>
             <div className="row align-items-center">

@@ -1,8 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLoaderData, useNavigate } from 'react-router-dom'
+import { getItem, isLoggedIn } from '../Api';
 
-export default function Header() {
-    
+
+export default function Header(props) {
+    let data = props;
+    console.log(data)
+    const userLoggedIn = isLoggedIn();
+    const navigate = useNavigate();
+    const [cartCount, setCartCount] = useState(data.data.reduce((x,y)=>x+y.noOfUnits,0));
+
+    const handleLogout = () => {
+        localStorage.setItem("isLoggedin", JSON.stringify(false));
+        navigate('/login');
+    };
+ 
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div className="container-fluid">
@@ -27,19 +40,33 @@ export default function Header() {
 
                     </ul>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <Link to="/cart"> <i class="bi bi-cart fs-4 fw-bolder me-4"></i></Link>
-                        <div >
-                        <button className="btn btn-primary text-white me-md-2" type="button">
-                        <Link to="login" className='link-light link-underline-opacity-0'>Login</Link>
-                            
+                        <Link to="/cart">
+
+                         <span className='position-relative me-4'>
+                                <span class="position-absolute top-0 start-100 text-white    translate-middle p-1 bg-danger border border-light rounded-circle">
+                                    {cartCount}
+                                </span>
+                            <i class="bi bi-cart fs-3 fw-bolder "></i>
+                            </span>
+                        </Link>
+                        {userLoggedIn ? (<div>
+                            <span>Welcome, User!</span>
+                            <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+                            {/* Add any other user-related information */}
+                        </div>) : (<div >
+                            <button className="btn btn-primary text-white me-md-2" type="button">
+                                <Link to="login" className='link-light link-underline-opacity-0'>Login</Link>
+
                             </button>
-                        <button className="btn btn-primary" type="button">
-                        <Link to="register" className='link-light link-underline-opacity-0'>Register</Link>
-                        </button>
-                        </div>
+                            <button className="btn btn-primary" type="button">
+                                <Link to="register" className='link-light link-underline-opacity-0'>Register</Link>
+                            </button>
+                        </div>)}
                     </div>
                 </div>
             </div>
         </nav>
     )
+
+
 }

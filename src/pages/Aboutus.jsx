@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom'
 
 export default function Aboutus() {
   let data=useLoaderData();
-  console.log(data)
+  // console.log(data)
   return (
     <div>Aboutus</div>
   )
