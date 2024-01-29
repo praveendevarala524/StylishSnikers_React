@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams ,Outlet, useNavigate, NavLink, useLocation, useMatch, useLoaderData } from 'react-router-dom'
+import { useParams ,Outlet, useNavigate, NavLink, useLocation, useMatch, useLoaderData, useOutletContext } from 'react-router-dom'
 export default function Itemdetails() {
     let data=useLoaderData();
+    let [noOfUnits,setCartCount]=useOutletContext();
     // console.log(data);
     let param = useParams();
     let ob = data.find((x) =>  x.id === Number(param.id) )
@@ -9,20 +10,24 @@ export default function Itemdetails() {
     let [item, setitem] = useState(ob);
     let [mainImage,setMainImage] = useState(ob.images[0]);
     const navigate =useNavigate();
-  
-    useEffect(() => { }, [])
+        // let prevState=useLocation();
+        // console.log(prevState)
+    useEffect(() => {
+
+     }, [])
    
     const handlesubmit =() =>{
             let arrayinLocalStorage=JSON.parse(localStorage.getItem("arrayinLocalStorage"));
             if(arrayinLocalStorage.some(x=>x.id===item.id)){
-            item.noOfUnits++;
+                        alert("item already present in Cart")
             }
             else{
             item.noOfUnits=1;
             arrayinLocalStorage.push(item);
             }
             localStorage.setItem("arrayinLocalStorage",JSON.stringify(arrayinLocalStorage));
-            console.table(JSON.parse(localStorage.getItem("arrayinLocalStorage")));
+            setCartCount(arrayinLocalStorage.reduce((x,y)=>x+y.noOfUnits,0))
+            // console.table(JSON.parse(localStorage.getItem("arrayinLocalStorage")));
       }
 
     const changeImage =(n) => {

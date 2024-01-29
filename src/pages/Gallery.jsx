@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function Gallery() {
   let data=useLoaderData();
   // console.table(data)
+ 
+
   let [param,setparam] = useSearchParams()
-  const [items, setitems] = useState(data);
+//  let newType=new URLSearchParams(param);
+//  console.log(newType.get("category"))
+  const [items, setitems] = useState(param? data: items.filter(x=>x.category===param.category));
   let [mainData,setMainData]=useState(data);
 
  
@@ -64,6 +68,7 @@ export default function Gallery() {
                 <div className="card-body">
                   <h5 className="card-title">{x.title}</h5>
                   <p className="card-text">{x.description}</p>
+                  {/* <Link to={`${x.id}`} state={newType} className="btn btn-primary">See More</Link> */}
                   <Link to={`${x.id}`} className="btn btn-primary">See More</Link>
                 </div>
               </div>

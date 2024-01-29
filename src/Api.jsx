@@ -18,5 +18,5 @@ export function getItem(){
 export function isLoggedIn() {
     let isLoggedInValue = localStorage.getItem("isLoggedin");
     return JSON.parse(isLoggedInValue);
-    console.log(JSON.parse(isLoggedInValue))
+    // console.log(JSON.parse(isLoggedInValue))
 }

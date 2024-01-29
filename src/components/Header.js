@@ -4,16 +4,27 @@ import { getItem, isLoggedIn } from '../Api';
 
 
 export default function Header(props) {
-    let data = props;
-    console.log(data)
-    const userLoggedIn = isLoggedIn();
+    let noOfUnits = props.noOfUnits;
+    console.log(noOfUnits)
+
+    const userLoggedIn = true;
     const navigate = useNavigate();
-    const [cartCount, setCartCount] = useState(data.data.reduce((x,y)=>x+y.noOfUnits,0));
+    const [cartCount, setCartCount] = useState(noOfUnits);
 
     const handleLogout = () => {
         localStorage.setItem("isLoggedin", JSON.stringify(false));
         navigate('/login');
     };
+
+    useEffect(() => {
+        // Calculate cart count here
+        // const newCartCount = data.data.reduce((x, y) => x + y.noOfUnits, 0);
+        // Update cart count using setCartCount
+        setCartCount(props.noOfUnits)
+        console.log(props)
+      
+    }, [props]); // Add data.data as a dependency if it's needed for the calculation
+
  
 
     return (

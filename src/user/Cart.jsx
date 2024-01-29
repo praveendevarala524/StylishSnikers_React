@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate, useLoaderData } from 'react-router-dom';
+import { Navigate, useNavigate, useLoaderData, useOutletContext } from 'react-router-dom';
 import { getItem } from '../Api';
+
 
 export default function Cart() {
   let data=useLoaderData();
+  let [noOfUnits,setCartCount]=useOutletContext();
+
   const [cartData, setCartData] = useState(data);
   const total = cartData.reduce((x, y) => x + y.price*y.noOfUnits, 0);
-  console.log(cartData);
+  // console.log(cartData);
 
   const isLoggedIn = false;
   if (isLoggedIn) {
@@ -19,6 +22,7 @@ export default function Cart() {
     setCartData(updatedCart);
     // const updatedLocalStorage = getItem().filter(item => item.id !== itemId);
     localStorage.setItem("arrayinLocalStorage", JSON.stringify(updatedCart));
+    setCartCount(updatedCart.reduce((x,y)=>x+y.noOfUnits,0));
   };
 
   const handleNoOfUnits = (sign,id) =>{
@@ -34,9 +38,21 @@ export default function Cart() {
           localStorage.setItem("arrayinLocalStorage",JSON.stringify(cartData));
           let newArray=JSON.parse(localStorage.getItem("arrayinLocalStorage"));
           setCartData(newArray)
+          setCartCount(newArray.reduce((x,y)=>x+y.noOfUnits,0));
+        }
+       const clearAll = ()=>{
+          localStorage.removeItem("arrayinLocalStorage")
+          setCartCount(0)
+          setCartData([])
         }
   return (
     <div className="container mt-5 py-5">
+      <div className="row">
+        <div className="col-2">
+        <button className="btn btn-danger" onClick={()=>{clearAll();}}>Clear All</button>
+        </div>
+       
+      </div>
       <div className="row">
         <div className="col-10">
           {cartData.map(x => (
