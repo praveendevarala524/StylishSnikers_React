@@ -5,7 +5,7 @@ import { getItem, isLoggedIn } from '../Api';
 
 export default function Header(props) {
     let noOfUnits = props.noOfUnits;
-    console.log(noOfUnits)
+    // console.log(noOfUnits)
 
     const userLoggedIn = true;
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Header(props) {
         // const newCartCount = data.data.reduce((x, y) => x + y.noOfUnits, 0);
         // Update cart count using setCartCount
         setCartCount(props.noOfUnits)
-        console.log(props)
+        // console.log(props)
       
     }, [props]); // Add data.data as a dependency if it's needed for the calculation
 

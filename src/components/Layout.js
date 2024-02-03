@@ -5,10 +5,10 @@ import { getItem } from '../Api';
 
 export default function () {
 let data=useLoaderData(); 
-console.log(data)
+// console.log(data)
 
 let totalItems=data.reduce((x,y)=>x+y.noOfUnits,0);
-console.log(totalItems)
+// console.log(totalItems)
 let [products,setProducts]=useState(data)   ;
 let [noOfUnits,setCartCount]=useState(totalItems);
 useEffect(()=>{

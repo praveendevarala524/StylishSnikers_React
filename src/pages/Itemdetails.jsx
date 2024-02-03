@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams ,Outlet, useNavigate, NavLink, useLocation, useMatch, useLoaderData, useOutletContext } from 'react-router-dom'
+
+import { useParams ,Outlet, useNavigate, NavLink, useLocation, useMatch, useLoaderData, useOutletContext, Link } from 'react-router-dom'
 export default function Itemdetails() {
     let data=useLoaderData();
+    let parameters= useLocation();
+    console.log(parameters);
     let [noOfUnits,setCartCount]=useOutletContext();
     // console.log(data);
     let param = useParams();
@@ -36,6 +39,17 @@ export default function Itemdetails() {
        
     return (
         <div className='container py-5 mt-5'>
+            <div className="row">
+                <div className="col-3">
+                    <button className="btn btn-primary">
+                       <Link to={"/gallery?category="+`${parameters.state}`} className='link-light'>
+                       Back to all
+                        </Link> 
+                      
+                        
+                        </button>
+                </div>
+            </div>
             <div className="row align-items-center">
                 <div className="col-6">
                     {<img src={mainImage} className="img-fluid " alt="" /> }
