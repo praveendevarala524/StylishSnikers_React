@@ -7,7 +7,7 @@ export default function Header(props) {
     let noOfUnits = props.noOfUnits;
     // console.log(noOfUnits)
 
-    const userLoggedIn = true;
+    const userLoggedIn =props.userLoggedIn || false;
     const navigate = useNavigate();
     const [cartCount, setCartCount] = useState(noOfUnits);
 

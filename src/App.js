@@ -12,14 +12,15 @@ import Itemdetails from "./pages/Itemdetails";
 import Dashboard from "./components/Product/Dashboard";
 import Price from "./components/Product/Price";
 import Review from "./components/Product/Review";
-import api, { getItem } from "./Api";
+import api, { getItem, isLoggedIn } from "./Api";
 import Error from "./pages/Error";
 import Cart from "./user/Cart";
-
+import {action as loginAction} from "./Api";
+import Protected from './Host/Protected'
 
 let router=createBrowserRouter(createRoutesFromElements(
 
-          <Route path="/" loader={getItem}  element={<Layout />}>
+          <Route path="/" loader={getItem} element={<Layout />}>
             <Route index loader={api} element={<Home />} />
             <Route path="*" element={<Error />}  />
             <Route path="gallery" loader={api} element={<Gallery />} />
@@ -32,8 +33,9 @@ let router=createBrowserRouter(createRoutesFromElements(
             </Route>
             <Route path="aboutus" loader={api} element={<Aboutus />} />
             <Route path="cart" loader={getItem} element={<Cart />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login"  action={loginAction} element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="protected" loader={isLoggedIn} element={<Protected/>}/>
           </Route>
       
 ))

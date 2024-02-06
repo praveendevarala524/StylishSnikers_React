@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import { Outlet, useLoaderData } from "react-router-dom";
-import { getItem } from '../Api';
 
-export default function () {
+
+export default function Layout() {
 let data=useLoaderData(); 
 // console.log(data)
 
@@ -23,6 +23,7 @@ function handleSetProducts(arr){
     setProducts(arr)
  
 }
+
 
     return (
         <div>
